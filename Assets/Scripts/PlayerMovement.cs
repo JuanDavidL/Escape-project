@@ -54,16 +54,29 @@ public class PlayerMovement : MonoBehaviour
     //Permite que se mueva sin parecer una papa tiesa, haciendo que el personaje gire suavemente hacia la dirección del movimiento.
     void Move()
     {
-        // Vector3 move = transform.right * moveInput.x + transform.forward * moveInput.y;
-        // controller.Move(move * speed * Time.deltaTime);
         Vector3 move = new Vector3(moveInput.x, 0f, moveInput.y);
-        if (move != Vector3.zero)
+
+        Vector3 camForward = Camera.main.transform.forward;
+        camForward.y = 0f;
+        camForward.Normalize();
+
+        Vector3 camRight = Camera.main.transform.right;
+        camRight.y = 0f;
+        camRight.Normalize();
+
+        Vector3 moveDirection = camForward * move.z + camRight * move.x;
+
+        if (moveDirection != Vector3.zero)
         {
-            Quaternion targetRotation = Quaternion.LookRotation(move);
-            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, 10f * Time.deltaTime);
+            // SOLO rotar si el jugador NO está retrocediendo
+            if (moveInput.y >= 0)
+            {
+                Quaternion targetRotation = Quaternion.LookRotation(moveDirection);
+                transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, 10f * Time.deltaTime);
+            }
         }
         speed = stats.CurrentMoveSpeed;
-        controller.Move(move * speed * Time.deltaTime);
+        controller.Move(moveDirection * speed * Time.deltaTime);
     }
     //Aplica la gravedad al jugador, asegurándose de que el jugador se mantenga en el suelo y pueda saltar correctamente.
     void ApplyGravity()

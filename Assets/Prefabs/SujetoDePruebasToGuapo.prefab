@@ -14,7 +14,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 50fcbcf505d774448a123186388d348f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0.2
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 50fcbcf505d774448a123186388d348f, type: 3}
       propertyPath: m_LocalPosition.z
@@ -49,8 +49,16 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 50fcbcf505d774448a123186388d348f, type: 3}
+      propertyPath: m_Icon
+      value: 
+      objectReference: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
+    - target: {fileID: 919132149155446097, guid: 50fcbcf505d774448a123186388d348f, type: 3}
       propertyPath: m_Name
       value: SujetoDePruebasToGuapo
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 50fcbcf505d774448a123186388d348f, type: 3}
+      propertyPath: m_TagString
+      value: Player
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -105,7 +113,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
   speed: 5
-  gravity: -9.81
+  gravity: -18.5
   jumpHeight: 2
   dashDuration: 0.2
   dashCooldown: 1
@@ -133,4 +141,4 @@ CharacterController:
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: 1, z: 0}

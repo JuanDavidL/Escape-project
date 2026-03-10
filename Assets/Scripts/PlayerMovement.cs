@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -7,6 +8,7 @@ public class PlayerMovement : MonoBehaviour
     //las acciones de entrada con el nuevo sistema de entrada de Unity.
     private PlayerInputActions inputActions;
     private CharacterController controller;
+    private PlayerStats stats; //Script con las estadisticas del jugador, para editarlas
     private Vector2 moveInput;
     private Vector3 velocity;
     //Se definen variables para la velocidad, gravedad y altura de salto.
@@ -15,11 +17,18 @@ public class PlayerMovement : MonoBehaviour
     public float jumpHeight = 2f;
     //Se define un booleano para verificar si el jugador está en el suelo.
     bool isGrounded;
+    [Header("Dash Settings")]
+    private bool isDashing;
+    [SerializeField] private float dashDuration = 0.2f;
+    [SerializeField] private float dashCooldown = 1f;
+    private float lastDashTime;
     //En el método Awake, se inicializan las acciones de entrada y se obtiene el componente CharacterController.
     void Awake()
     {
         inputActions = new PlayerInputActions();
         controller = GetComponent<CharacterController>();
+        // llamada para el script de estadisticas
+        stats = GetComponent<PlayerStats>();
     }
     //En el método OnEnable, se habilitan las acciones de entrada y se suscriben a los eventos de movimiento y salto.
     void OnEnable()
@@ -28,6 +37,7 @@ public class PlayerMovement : MonoBehaviour
         inputActions.Player.Move.performed += ctx => moveInput = ctx.ReadValue<Vector2>();
         inputActions.Player.Move.canceled += ctx => moveInput = Vector2.zero;
         inputActions.Player.Jump.performed += ctx => Jump();
+        inputActions.Player.Dash.started += ctx => OnDash();
     }
     //En el método OnDisable, se deshabilitan las acciones de entrada para evitar que sigan
     //recibiendo acciones cuando el objeto esté desactivado.
@@ -52,6 +62,7 @@ public class PlayerMovement : MonoBehaviour
             Quaternion targetRotation = Quaternion.LookRotation(move);
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, 10f * Time.deltaTime);
         }
+        speed = stats.CurrentMoveSpeed;
         controller.Move(move * speed * Time.deltaTime);
     }
     //Aplica la gravedad al jugador, asegurándose de que el jugador se mantenga en el suelo y pueda saltar correctamente.
@@ -75,5 +86,36 @@ public class PlayerMovement : MonoBehaviour
         {
             velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
         }
+    }
+    // Control para limitar los dash + cooldown
+    void OnDash()
+    {
+        if (!isDashing && Time.time >= lastDashTime + dashCooldown)
+        {
+            StartCoroutine(PerformDash());
+        }
+    }
+    // aplicacion del dash al movimiento del jugador
+    private IEnumerator PerformDash()
+    {
+        isDashing = true;
+        lastDashTime = Time.time;
+
+        float dashForce = stats != null ? stats.CurrentDashForce : 15f;
+
+        Vector3 inputDir = new Vector3(moveInput.x, 0f, moveInput.y).normalized;
+        Vector3 dashDirection = inputDir != Vector3.zero ? inputDir : transform.forward;
+
+        float timer = 0f;
+        while (timer < dashDuration)
+        {
+            // Movimiento constante ignorando la velocidad normal y la gravedad
+            controller.Move(dashDirection * dashForce * Time.deltaTime);
+
+            timer += Time.deltaTime;
+            yield return null; // Hacemos una espera al siguiente frame
+        }
+
+        isDashing = false;
     }
 }

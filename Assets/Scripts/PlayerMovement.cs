@@ -58,7 +58,8 @@ public class PlayerMovement : MonoBehaviour
 
         if (moveDirection != Vector3.zero)
         {
-            // SOLO rotar si el jugador NO está retrocediendo
+            //Se mueve hacia la dirección del movimiento solo si el jugador está moviéndose hacia adelante o hacia los lados, 
+            //evitando que gire al retroceder y cause interacciones raras con la cámara.
             if (moveInput.y >= 0)
             {
                 Quaternion targetRotation = Quaternion.LookRotation(moveDirection);
@@ -77,9 +78,7 @@ public class PlayerMovement : MonoBehaviour
         {
             velocity.y = -2f;
         }
-
         velocity.y += gravity * Time.deltaTime;
-
         controller.Move(velocity * Time.deltaTime);
     }
     //Evita que el jugador salte infinitamente sin tocar el suelo.

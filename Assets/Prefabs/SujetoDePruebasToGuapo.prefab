@@ -79,6 +79,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 50fcbcf505d774448a123186388d348f, type: 3}
       insertIndex: -1
       addedObject: {fileID: 7744042806479085719}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 50fcbcf505d774448a123186388d348f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5367920232400414043}
   m_SourcePrefab: {fileID: 100100000, guid: 50fcbcf505d774448a123186388d348f, type: 3}
 --- !u!1 &1484924536720117037 stripped
 GameObject:
@@ -183,3 +186,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerStats
   baseMoveSpeed: 5
+--- !u!114 &5367920232400414043
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1484924536720117037}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f14122b8750ea2048ab5d8618a7512f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerHealth
+  maxHealth: 100
+  currentHealth: 0

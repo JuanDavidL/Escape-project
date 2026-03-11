@@ -16,7 +16,6 @@ public class InventoryManager : MonoBehaviour
     //private bool isInventoryActive = false;
     public static int currentInventorySize = 2;
     public int maxInventorySize = 4;
-
     public Item testingItem;
 
     //public Transform itemContent;
@@ -26,7 +25,6 @@ public class InventoryManager : MonoBehaviour
     //weaponAmmo Municion;
 
     //SpriteHolder panelinventory;
-
     private void Awake()
     {
         if (Instance == null) Instance = this;
@@ -35,16 +33,11 @@ public class InventoryManager : MonoBehaviour
 
     private void Start()
     {
-
         currentInventorySize = 2;
-
-
         //inventoryUI.SetActive(false);
         //Cursor.lockState = CursorLockMode.None;
         //vida = FindAnyObjectByType<SistemaVida>();
         //Municion = FindAnyObjectByType<weaponAmmo>();
-
-
     }
 
     public void TestFunction()
@@ -65,8 +58,6 @@ public class InventoryManager : MonoBehaviour
             return true;
             //if (onItemChangedCallback != null) onItemChangedCallback.Invoke();
         }
-
-
         else
         {
             Debug.Log("Inventory is full");
@@ -82,13 +73,11 @@ public class InventoryManager : MonoBehaviour
             currentItems.Remove(itemToRemove);
             //OnItemRemoved.Invoke();
             Debug.Log("Current inventory fileld size is" + currentItems.Count);
-
         }
         else
         {
             Debug.Log("Can't remove item, as it is already empty");
         }
-
     }
 
     public void GrowInventory()
@@ -99,8 +88,11 @@ public class InventoryManager : MonoBehaviour
             currentInventorySize++;
             //Debug.Log("Grow was succesful, new size is " + currentInventorySize);
             //OnInventoryGrowth.Invoke();
+        } 
+        else 
+        {
+            Debug.Log("Inventory is already max size");
         }
-        else Debug.Log("Inventory is already max size");
     }
 
     public void ShrinkInventory()
@@ -142,5 +134,4 @@ public class InventoryManager : MonoBehaviour
     {
         OnInventoryShrink.Invoke();
     }
-
 }

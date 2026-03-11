@@ -27,7 +27,6 @@ public class PlayerStats : MonoBehaviour
             // Buscamos el InventoryManager
             if (InventoryManager.Instance != null)
             {
-                Debug.Log("vamo bien");
                 InventoryManager.Instance.InvokeOnGrowth();
             }
             return;

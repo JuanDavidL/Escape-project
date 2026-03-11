@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79b622fab3f49494286b8f1116743f00, type: 3}
   m_Name: PowerUp_Inventory
   m_EditorClassIdentifier: Assembly-CSharp::PowerUpData
-  targetStat: 0
-  amout: 0
+  targetStat: 2
+  amout: 1

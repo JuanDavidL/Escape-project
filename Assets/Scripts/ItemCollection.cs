@@ -13,8 +13,8 @@ public class ItemCollection : MonoBehaviour
     }
 
     private void OnTriggerEnter(Collider other) {
-        if (other.name == "Player"){
-            Debug.Log("got to trigger enter");
+        if (other.tag == "Player"){
+            Debug.Log("got t o trigger enter");
             if (inventoryManager.AddItem(itemRef)) 
             {
                 DestroyCollectible();               

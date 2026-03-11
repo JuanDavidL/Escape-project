@@ -37,12 +37,15 @@ public class InventorySlot : MonoBehaviour
         {
             Debug.Log("This slot had an object, which was" + currentItem._itemName);
             inventoryManager.RemoveItem(currentItem);
-            Instantiate (currentItem._prefab, new Vector3(playerRef.transform.position.x,playerRef.transform.position.y-2f,playerRef.transform.position.z), Quaternion.identity);
-            
-            
+            Instantiate (currentItem._prefab,
+            new Vector3(playerRef.transform.position.x,playerRef.transform.position.y-2f,playerRef.transform.position.z),
+            Quaternion.identity);
         }
-
-        else Debug.Log("This slot was empty, so nothing happened");
+        else
+        {
+            Debug.Log("This slot was empty, so nothing happened");
+        } 
+            
 
         ClearSlot();
         

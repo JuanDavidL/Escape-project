@@ -7,7 +7,11 @@ using System.Collections.Generic;
 public class InventoryManager : MonoBehaviour
 {
     public static InventoryManager Instance;
-    public List<Item> currentItems =  new List<Item>();
+    private void Awake()
+    {
+        Instance = this;
+    }
+    public List<Item> currentItems = new List<Item>();
 
     public UnityEvent OnItemAdded, OnItemRemoved, OnInventoryGrowth, OnInventoryShrink;
 
@@ -25,9 +29,6 @@ public class InventoryManager : MonoBehaviour
     //weaponAmmo Municion;
     
     //SpriteHolder panelinventory;
-   
-
-
     private void Start()
     {
         currentInventorySize = 2;
@@ -130,5 +131,4 @@ public class InventoryManager : MonoBehaviour
     {
         OnInventoryShrink.Invoke();
     }
-    
 }

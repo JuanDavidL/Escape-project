@@ -66,8 +66,8 @@ public class PlayerAnimationManager : MonoBehaviour
 
     void UpdateSpeedValue()
     {
-        Debug.Log("CurrentMoveSpeed is " + playerStats.CurrentMoveSpeed);
-        Debug.Log("currentBaseMove is " + playerStats.currentBaseMove);
+        // Debug.Log("CurrentMoveSpeed is " + playerStats.CurrentMoveSpeed);
+        // Debug.Log("currentBaseMove is " + playerStats.currentBaseMove);
 
         if (playerStats.CurrentMoveSpeed == playerStats.currentBaseMove)
         {
@@ -77,6 +77,33 @@ public class PlayerAnimationManager : MonoBehaviour
         {
             animator.SetFloat("_movementSpeed", 2);
         }
+    }
+
+    private void OnEnable() {
+        playerHealth = GetComponent<PlayerHealth>();
+
+        if (playerHealth != null) {
+            playerHealth.OnHealthChanged += HandleDamageAnimation;
+            playerHealth.OnDeath += HandleDeathAnimation;
+        }
+    }
+
+    private void OnDisable() {
+        // Limpiar suscripcion
+        if (playerHealth != null) {
+            playerHealth.OnHealthChanged -= HandleDamageAnimation;
+            playerHealth.OnDeath -= HandleDeathAnimation;
+        }
+    }
+
+    // Función intermedia que hace coincidir las firmas
+    private void HandleDamageAnimation(float healthPercent) {
+        // Solo activamos daño si no ha muerto
+        animator.SetTrigger("_Damaged");
+    }
+
+    private void HandleDeathAnimation() {
+        animator.SetBool("_IsDead", true);
     }
 
 

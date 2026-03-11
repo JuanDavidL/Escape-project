@@ -9,6 +9,7 @@ TagManager:
   - sfxSlider
   - musicSlider
   - Arrow
+  - OtherDoor
   layers:
   - Default
   - TransparentFX

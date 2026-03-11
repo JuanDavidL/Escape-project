@@ -12290,6 +12290,10 @@ PrefabInstance:
       value: 6
       objectReference: {fileID: 0}
     - target: {fileID: -4677237296440866189, guid: 0be0b1da9d74ba0468e6cc7b105832af, type: 3}
+      propertyPath: m_TagString
+      value: OtherDoor
+      objectReference: {fileID: 0}
+    - target: {fileID: -4677237296440866189, guid: 0be0b1da9d74ba0468e6cc7b105832af, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 0
       objectReference: {fileID: 0}

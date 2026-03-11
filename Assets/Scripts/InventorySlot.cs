@@ -15,13 +15,13 @@ public class InventorySlot : MonoBehaviour
 
     //public Item currentItem;
 
-    private void Start() {
+    private void Start()
+    {
         //currentItem = null;
         icon = GetComponent<Image>();
         inventoryUI = GetComponentInParent<InventoryUI>();
         playerRef = GameObject.Find("Player");
         inventoryManager = GameObject.Find("Inventory Manager").GetComponent<InventoryManager>();
-        
     }
 
     public void SetSlot(Item item)
@@ -37,7 +37,6 @@ public class InventorySlot : MonoBehaviour
         {
             Debug.Log("This slot had an object, which was" + currentItem._itemName);
             inventoryManager.RemoveItem(currentItem);
-            
             Instantiate (currentItem._prefab, new Vector3(playerRef.transform.position.x,playerRef.transform.position.y-2f,playerRef.transform.position.z), Quaternion.identity);
             
             

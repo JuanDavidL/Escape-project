@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -21,6 +22,15 @@ public class PlayerStats : MonoBehaviour
 
     public void ApplyPowerUp(PowerUpData powerUp)
     {
+        if (powerUp.targetStat == StatType.InventorySlots)
+        {
+            // Buscamos el InventoryManager
+            if (InventoryManager.Instance != null)
+            {
+                InventoryManager.Instance.InvokeOnGrowth();
+            }
+            return;
+        }
         if (!statModifiers.ContainsKey(powerUp.targetStat))
             statModifiers[powerUp.targetStat] = 0f;
 

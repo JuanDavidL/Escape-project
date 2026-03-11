@@ -7,7 +7,7 @@ using System.Collections.Generic;
 public class InventoryManager : MonoBehaviour
 {
     public static InventoryManager Instance;
-    public List<Item> currentItems =  new List<Item>();
+    public List<Item> currentItems = new List<Item>();
 
     public UnityEvent OnItemAdded, OnItemRemoved, OnInventoryGrowth, OnInventoryShrink;
 
@@ -16,7 +16,6 @@ public class InventoryManager : MonoBehaviour
     //private bool isInventoryActive = false;
     public static int currentInventorySize = 2;
     public int maxInventorySize = 4;
-
     public Item testingItem;
 
     //public Transform itemContent;
@@ -24,23 +23,21 @@ public class InventoryManager : MonoBehaviour
 
     //SistemaVida vida;
     //weaponAmmo Municion;
-    
-    //SpriteHolder panelinventory;
-   
 
+    //SpriteHolder panelinventory;
+    private void Awake()
+    {
+        if (Instance == null) Instance = this;
+        else Destroy(gameObject);
+    }
 
     private void Start()
     {
-        
         currentInventorySize = 2;
-        
-
         //inventoryUI.SetActive(false);
         //Cursor.lockState = CursorLockMode.None;
         //vida = FindAnyObjectByType<SistemaVida>();
         //Municion = FindAnyObjectByType<weaponAmmo>();
-        
-        
     }
 
     public void TestFunction()
@@ -61,8 +58,6 @@ public class InventoryManager : MonoBehaviour
             return true;
             //if (onItemChangedCallback != null) onItemChangedCallback.Invoke();
         }
-
-
         else
         {
             Debug.Log("Inventory is full");
@@ -73,18 +68,16 @@ public class InventoryManager : MonoBehaviour
     public void RemoveItem(Item itemToRemove)
     {
         Debug.Log("It got to removeitem function in inventory manager");
-        if(currentItems.Count > 0)
+        if (currentItems.Count > 0)
         {
             currentItems.Remove(itemToRemove);
             //OnItemRemoved.Invoke();
             Debug.Log("Current inventory fileld size is" + currentItems.Count);
-            
         }
         else
         {
             Debug.Log("Can't remove item, as it is already empty");
-        }        
-        
+        }
     }
 
     public void GrowInventory()
@@ -96,7 +89,10 @@ public class InventoryManager : MonoBehaviour
             //Debug.Log("Grow was succesful, new size is " + currentInventorySize);
             //OnInventoryGrowth.Invoke();
         } 
-        else Debug.Log("Inventory is already max size");
+        else 
+        {
+            Debug.Log("Inventory is already max size");
+        }
     }
 
     public void ShrinkInventory()
@@ -107,18 +103,18 @@ public class InventoryManager : MonoBehaviour
             currentInventorySize--;
             //Debug.Log("Shrink was succesful, new size is " + currentInventorySize);
             //OnInventoryShrink.Invoke();
-        } 
+        }
         else Debug.Log("Inventory is already minimum size, that is " + currentInventorySize);
     }
 
 
-// CALL EVENTS TESTING
+    // CALL EVENTS TESTING
 
     [ContextMenu("Invoke OnItemAdded")]
     public void InvokeOnAdd()
     {
         OnItemAdded.Invoke();
-    } 
+    }
 
     [ContextMenu("Invoke OnItemRemoved")]
     public void InvokeOnRemove()
@@ -130,6 +126,7 @@ public class InventoryManager : MonoBehaviour
     public void InvokeOnGrowth()
     {
         OnInventoryGrowth.Invoke();
+        Debug.Log("INVOKE INVENTARIO");
     }
 
     [ContextMenu("Invoke OnInventoryShrink")]
@@ -137,5 +134,4 @@ public class InventoryManager : MonoBehaviour
     {
         OnInventoryShrink.Invoke();
     }
-    
 }

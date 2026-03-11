@@ -7,6 +7,7 @@ public class InventoryUI : MonoBehaviour
     
     public float growthStepSize = 50f;
     public int totalSlots;
+    private float slothSize;
 
     public GameObject slotPrefab;
 
@@ -16,7 +17,7 @@ public class InventoryUI : MonoBehaviour
         rectTransform = GetComponent<RectTransform>();
         baseWidth = rectTransform.sizeDelta.x;
         currentWidth = baseWidth;
-        growthStepSize = slotPrefab.GetComponent<RectTransform>().sizeDelta.x;
+        slothSize = slotPrefab.GetComponent<RectTransform>().sizeDelta.x;
         
         inventoryManager = GameObject.Find("Inventory Manager").GetComponent<InventoryManager>();
         totalSlots = InventoryManager.currentInventorySize;
@@ -49,7 +50,7 @@ public class InventoryUI : MonoBehaviour
     public void GrowContainer()
     {
         Debug.Log("Initial width was " + currentWidth + ". Growing now");
-        currentWidth += growthStepSize;
+        currentWidth += slothSize + growthStepSize;
         rectTransform.sizeDelta = new Vector2(currentWidth, rectTransform.sizeDelta.y);
         Debug.Log("New width is " + currentWidth);
     }
@@ -58,7 +59,7 @@ public class InventoryUI : MonoBehaviour
     public void ShrinkContainer()
     {
         Debug.Log("Initial width was " + currentWidth + ". Shrinking now");
-        currentWidth -= growthStepSize;
+        currentWidth -= slothSize + growthStepSize;
         rectTransform.sizeDelta = new Vector2(currentWidth, rectTransform.sizeDelta.y);
         Debug.Log("New width is " + currentWidth);
     }

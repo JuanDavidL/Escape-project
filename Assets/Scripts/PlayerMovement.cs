@@ -27,6 +27,7 @@ public class PlayerMovement : MonoBehaviour
     // Variables para PlayerAnimationManager
 
     public PlayerInputActions inputActionsForAnimator { get; private set; }
+    public bool isDashingForAnimator { get; private set; }
 
     //En el método Awake, se inicializan las acciones de entrada y se obtiene el componente CharacterController.
     void Awake()
@@ -36,6 +37,7 @@ public class PlayerMovement : MonoBehaviour
         controller = GetComponent<CharacterController>();
         // llamada para el script de estadisticas
         stats = GetComponent<PlayerStats>();
+        isDashingForAnimator = isDashing;
     }
     //En el método OnEnable, se habilitan las acciones de entrada y se suscriben a los eventos de movimiento y salto.
     void OnEnable()
@@ -122,6 +124,7 @@ public class PlayerMovement : MonoBehaviour
     private IEnumerator PerformDash()
     {
         isDashing = true;
+        isDashingForAnimator = isDashing;
         lastDashTime = Time.time;
 
         float dashForce = stats != null ? stats.CurrentDashForce : 15f;
@@ -140,5 +143,6 @@ public class PlayerMovement : MonoBehaviour
         }
 
         isDashing = false;
+        isDashingForAnimator = isDashing;
     }
 }

@@ -41,6 +41,18 @@ public class PauseMenu : MonoBehaviour
         SceneManager.LoadScene(1);        
     }
 
+    public void ReturnToMenu()
+    {
+        StartCoroutine(StarGameCoroutine());
+    }
+
+    public IEnumerator ReturnToMenuCoroutine()
+    {   
+        StartCoroutine(TurnMusicDown());
+        yield return new WaitForSeconds(transitionTime);
+        SceneManager.LoadScene(0);        
+    }
+
     public void QuitGame()
     {
         StartCoroutine(QuitGameCoroutine());
@@ -60,6 +72,11 @@ public class PauseMenu : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
+    public void PlayButonSound()
+    {
+        AudioManager.Instance.PlaySFX(audioOnClick); 
+    }
+
     IEnumerator TurnMusicDown()
     {
 
@@ -70,11 +87,13 @@ public class PauseMenu : MonoBehaviour
         else
         {
             float musicVolume;
+            float currentMaxVolume = AudioManager.Instance.CurrentMusicVolume();
 
             while (AudioManager.Instance.CurrentMusicVolume() > 0f)
             {
+                
                 timer += Time.deltaTime;
-                musicVolume = Mathf.Lerp(1f, 0f, timer / transitionTime);
+                musicVolume = Mathf.Lerp(currentMaxVolume, 0f, timer / transitionTime);
                 AudioManager.Instance.ChangeMusicVolume(musicVolume);
                 yield return null;
             }

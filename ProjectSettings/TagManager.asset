@@ -8,6 +8,7 @@ TagManager:
   - Ground
   - sfxSlider
   - musicSlider
+  - Arrow
   layers:
   - Default
   - TransparentFX

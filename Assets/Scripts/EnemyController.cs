@@ -11,6 +11,10 @@ public class EnemyController : MonoBehaviour
     [SerializeField] float velocityRotateToObjective = 3f;
     [SerializeField] float maxAimAngle = 20f;
 
+    [Header("Line of Sight")]
+    [SerializeField] LayerMask lineOfSightMask = ~0;
+    [SerializeField] bool debugLineOfSight = true;
+
     [Header("Shooting")]
     [SerializeField] GameObject arrowPrefab;
     [SerializeField] Transform firePoint;
@@ -63,14 +67,50 @@ public class EnemyController : MonoBehaviour
                 Quaternion desiredLocalRotation = Quaternion.Euler(clampedEuler);
 
                 transform.localRotation = Quaternion.Slerp(transform.localRotation, desiredLocalRotation, velocityRotateToObjective * Time.deltaTime);
-            }
 
-            HandleShooting();
+                // Solo disparamos si el jugador está dentro del cono de visión (maxAimAngle)
+                float aimAngle = Vector3.Angle(firePoint.forward, worldDirection);
+                if (aimAngle <= maxAimAngle && HasLineOfSight(target, worldDirection))
+                {
+                    HandleShooting();
+                }
+                else
+                {
+                    _shootTimer = 0f;
+                }
+            }
+            else
+            {
+                _shootTimer = 0f;
+            }
         }
         else
         {
             _shootTimer = 0f;
         }
+    }
+
+    bool HasLineOfSight(Transform target, Vector3 direction)
+    {
+        if (firePoint == null)
+            return false;
+
+        float distance = Vector3.Distance(firePoint.position, target.position);
+        if (distance <= 0f)
+            return false;
+
+        bool hasHit = Physics.Raycast(firePoint.position, direction, out RaycastHit hit, distance, lineOfSightMask, QueryTriggerInteraction.Ignore);
+        bool result = hasHit && (hit.transform == target || hit.transform.CompareTag("Player"));
+
+        if (debugLineOfSight)
+        {
+            Color rayColor = result ? Color.green : Color.red;
+            Debug.DrawLine(firePoint.position, firePoint.position + direction * distance, rayColor);
+            if (hasHit)
+                Debug.DrawLine(firePoint.position, hit.point, rayColor);
+        }
+
+        return result;
     }
 
     void HandleShooting()
@@ -100,7 +140,7 @@ public class EnemyController : MonoBehaviour
         return angle;
     }
 
-    private void OnDrawGizmos()
+    private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.blue;
         Gizmos.DrawWireSphere(detectionCenter.position, detectionRatio);

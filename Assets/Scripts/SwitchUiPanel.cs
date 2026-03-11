@@ -7,4 +7,9 @@ public class SwitchUiPanel : MonoBehaviour
         panelToSwitch.SetActive(true);
         gameObject.SetActive(false);
     }
+
+    public void TestInLog()
+    {
+        Debug.Log("TestLog funtion from SwitchPanel was called in " + gameObject.name);
+    }
 }

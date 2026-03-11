@@ -91,10 +91,14 @@ public class PlayerMovement : MonoBehaviour
         velocity.y += gravity * Time.deltaTime;
         controller.Move(velocity * Time.deltaTime);
     }
-    //Evita que el jugador salte infinitamente sin tocar el suelo.
+    //Evita que el jugador salte infinitamente sin tocar el suelo,
+    //verifica si el jugador esta en el suelo (evita saltar sobre estructuras como ventanas o puertas)
     void Jump()
     {
-        if (controller.isGrounded)
+        //Se usa un RaycastHit para obtener información sobre el objeto que está debajo del jugador
+        //asegurándose de que solo pueda saltar si está 1.5 unidades tocando el suelo (Ground) y no otras superficies.
+        RaycastHit hit;
+        if (controller.isGrounded && Physics.Raycast(transform.position, Vector3.down, out hit, 1.5f) && hit.collider.CompareTag("Ground"))
         {
             velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
         }

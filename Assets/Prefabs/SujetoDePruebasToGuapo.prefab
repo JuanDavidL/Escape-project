@@ -10,15 +10,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 50fcbcf505d774448a123186388d348f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -9.60021
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 50fcbcf505d774448a123186388d348f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.2
+      value: 1.47596
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 50fcbcf505d774448a123186388d348f, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 4.55959
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 50fcbcf505d774448a123186388d348f, type: 3}
       propertyPath: m_LocalRotation.w
@@ -66,66 +66,28 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 50fcbcf505d774448a123186388d348f, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 8764210948004643484}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 50fcbcf505d774448a123186388d348f, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 4012167728046354693}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 50fcbcf505d774448a123186388d348f, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 6223399955423611270}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 50fcbcf505d774448a123186388d348f, type: 3}
       insertIndex: -1
       addedObject: {fileID: 4120622413604370013}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 50fcbcf505d774448a123186388d348f, type: 3}
       insertIndex: -1
+      addedObject: {fileID: 4012167728046354693}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 50fcbcf505d774448a123186388d348f, type: 3}
+      insertIndex: -1
       addedObject: {fileID: 7744042806479085719}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 50fcbcf505d774448a123186388d348f, type: 3}
       insertIndex: -1
       addedObject: {fileID: 5367920232400414043}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 50fcbcf505d774448a123186388d348f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6150982528613787632}
   m_SourcePrefab: {fileID: 100100000, guid: 50fcbcf505d774448a123186388d348f, type: 3}
 --- !u!1 &1484924536720117037 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 50fcbcf505d774448a123186388d348f, type: 3}
   m_PrefabInstance: {fileID: 1754973588915220604}
   m_PrefabAsset: {fileID: 0}
---- !u!65 &8764210948004643484
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1484924536720117037}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.902266, y: 2.1961343, z: 0.90881634}
-  m_Center: {x: 0.0039041638, y: 1.0776705, z: 0}
---- !u!114 &4012167728046354693
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1484924536720117037}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 24d6d9c95fe6ce743aaad6911d4b9fd7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
-  speed: 5
-  gravity: -18.5
-  jumpHeight: 2
-  dashDuration: 0.2
-  dashCooldown: 1
 --- !u!143 &6223399955423611270
 CharacterController:
   m_ObjectHideFlags: 0
@@ -160,7 +122,7 @@ Animator:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1484924536720117037}
   m_Enabled: 1
-  m_Avatar: {fileID: 0}
+  m_Avatar: {fileID: 9000000, guid: fc4abca50afe32345819b701056c4a3b, type: 3}
   m_Controller: {fileID: 9100000, guid: d780ab1ce10e8234ab587489027beb5b, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
@@ -173,6 +135,23 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &4012167728046354693
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1484924536720117037}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 24d6d9c95fe6ce743aaad6911d4b9fd7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
+  speed: 5
+  gravity: -18.5
+  jumpHeight: 2
+  dashDuration: 0.2
+  dashCooldown: 1
 --- !u!114 &7744042806479085719
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -200,3 +179,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerHealth
   maxHealth: 100
   currentHealth: 0
+--- !u!114 &6150982528613787632
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1484924536720117037}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc0b3402557cfae47ba59d47237ef72f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerAnimationManager

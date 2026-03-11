@@ -31,9 +31,13 @@ public class DoorManager : MonoBehaviour
     IEnumerator OpenDoor()
     {
         doorOpened = true;
-
+        float openRadius = 90f;
         Quaternion startRotation = door.rotation;
-        Quaternion targetRotation = startRotation * Quaternion.Euler(0, -90, 0);
+        if (door.tag != "OtherDoor")
+        {
+            openRadius = -openRadius;
+        }
+        Quaternion targetRotation = startRotation * Quaternion.Euler(0, openRadius, 0);
 
         float time = 0;
 

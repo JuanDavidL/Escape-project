@@ -2,45 +2,102 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
+    [Header("Detection")]
     [SerializeField] Transform detectionCenter;
     [SerializeField] float detectionRatio;
     [SerializeField] LayerMask detectionLayers;
 
-    Collider[] _colisionesDeteccion;
-    [SerializeField] bool _objetivo;
-    [SerializeField] float _distanciaConObjetivo;
-    [SerializeField] float _velocidadRotacionObjetivo;
+    [Header("Aim")]
+    [SerializeField] float velocityRotateToObjective = 3f;
+    [SerializeField] float maxAimAngle = 20f;
 
-    [SerializeField] Transform _navegacionCentro;
-    [SerializeField] Vector3 _navegacionTamano;
+    [Header("Shooting")]
+    [SerializeField] GameObject arrowPrefab;
+    [SerializeField] Transform firePoint;
+    [SerializeField] float shootInterval = 3f;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    [Header("Debug / Navigation")]
+    [SerializeField] Transform navigateCenter;
+    [SerializeField] Vector3 navigationSize;
+
+    Collider[] collisionsDetection;
+    bool objective;
+
+    float _shootTimer;
+    Quaternion _initialLocalRotation;
+
     void Start()
     {
-        
+        _initialLocalRotation = transform.localRotation;
     }
 
-    // Update is called once per frame
     void Update()
     {
-        //Validamos todo colaider que entre en la zona de deteccion con la capa que hemos definido
-        _colisionesDeteccion = Physics.OverlapSphere(detectionCenter.position, detectionRatio, detectionLayers);
+        // Validamos todo collider que entre en la zona de detección con la capa que hemos definido
+        collisionsDetection = Physics.OverlapSphere(detectionCenter.position, detectionRatio, detectionLayers);
 
-        //Validamos que el personaje entre en el rango de deteccion del enemigo, si el valor es mayor a uno significa que el
-        //Player esta en el rango
-        _objetivo = _colisionesDeteccion.Length > 0 ? true : false;
+        bool wasObjective = objective;
+        objective = collisionsDetection.Length > 0;
 
-        if (_objetivo)
+        if (objective)
         {
-            //_distanciaConObjetivo = Vector3.Distance(transform.position, _colisionesDeteccion[0].transform.position);
+            // Si acabamos de detectar al jugador, forzamos el primer disparo inmediato
+            if (!wasObjective)
+                _shootTimer = shootInterval;
 
-            Vector3 _direccion = _colisionesDeteccion[0].transform.position - transform.position;
-            //Vector3 _direccion = new Vector3(_colisionesDeteccion[0].transform.localPosition.x - 2, _colisionesDeteccion[0].transform.position.y, _colisionesDeteccion[0].transform.position.z) - transform.position;
-            Quaternion _rotacion = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(_direccion), _velocidadRotacionObjetivo * Time.deltaTime);
-            _rotacion.x = 0;
-            _rotacion.z = 0;
-            transform.rotation = _rotacion;
+            Transform target = collisionsDetection[0].transform;
+            Vector3 worldDirection = (target.position - transform.position).normalized;
+            if (worldDirection.sqrMagnitude > 0.001f)
+            {
+                // Convertimos la dirección al espacio local del padre para que el control se efectúe en local
+                Vector3 localDirection = transform.parent != null ? transform.parent.InverseTransformDirection(worldDirection) : worldDirection;
+
+                Quaternion targetLocalRotation = Quaternion.LookRotation(localDirection);
+                Vector3 targetEuler = targetLocalRotation.eulerAngles;
+
+                Vector3 initialEuler = _initialLocalRotation.eulerAngles;
+                float yaw = ClampAngleDelta(targetEuler.y - initialEuler.y, maxAimAngle);
+                float pitch = ClampAngleDelta(targetEuler.x - initialEuler.x, maxAimAngle);
+
+                Vector3 clampedEuler = new Vector3(initialEuler.x + pitch, initialEuler.y + yaw, initialEuler.z);
+                Quaternion desiredLocalRotation = Quaternion.Euler(clampedEuler);
+
+                transform.localRotation = Quaternion.Slerp(transform.localRotation, desiredLocalRotation, velocityRotateToObjective * Time.deltaTime);
+            }
+
+            HandleShooting();
         }
+        else
+        {
+            _shootTimer = 0f;
+        }
+    }
+
+    void HandleShooting()
+    {
+        if (arrowPrefab == null || firePoint == null)
+            return;
+
+        _shootTimer += Time.deltaTime;
+        if (_shootTimer >= shootInterval)
+        {
+            _shootTimer = 0f;
+            Instantiate(arrowPrefab, firePoint.position, firePoint.rotation);
+        }
+    }
+
+    static float ClampAngleDelta(float delta, float maxDelta)
+    {
+        delta = NormalizeAngle(delta);
+        return Mathf.Clamp(delta, -maxDelta, maxDelta);
+    }
+
+    static float NormalizeAngle(float angle)
+    {
+        angle %= 360f;
+        if (angle > 180f) angle -= 360f;
+        if (angle < -180f) angle += 360f;
+        return angle;
     }
 
     private void OnDrawGizmos()
@@ -49,6 +106,6 @@ public class EnemyController : MonoBehaviour
         Gizmos.DrawWireSphere(detectionCenter.position, detectionRatio);
 
         Gizmos.color = Color.yellow;
-        Gizmos.DrawWireCube(_navegacionCentro.position, _navegacionTamano);
+        Gizmos.DrawWireCube(navigateCenter.position, navigationSize);
     }
 }

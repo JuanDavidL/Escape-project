@@ -147,12 +147,12 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 340
-        width: 240
-        height: 169
+        y: 0
+        width: 721
+        height: 509
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      border: {x: 200, y: 150, z: 200, w: 150}
       customData: 
       outline: []
       physicsShape: []
@@ -160,204 +160,6 @@ TextureImporter:
       bones: []
       spriteID: 28a27a263899e3047b251e04e58e534f
       internalID: 1620132717
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: UI board Medium Set_1
-      rect:
-        serializedVersion: 2
-        x: 240
-        y: 340
-        width: 240
-        height: 169
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: e8ec39590deb05d4da1ac9e6c00209ba
-      internalID: -2087732113
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: UI board Medium Set_2
-      rect:
-        serializedVersion: 2
-        x: 480
-        y: 340
-        width: 240
-        height: 169
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: dddb4d5be0f6e1f4ea6effd06feb6800
-      internalID: 706237613
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: UI board Medium Set_3
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 171
-        width: 240
-        height: 169
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 625fa1e68d355b1498920edbf2c5d2a1
-      internalID: -1845442055
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: UI board Medium Set_4
-      rect:
-        serializedVersion: 2
-        x: 240
-        y: 171
-        width: 240
-        height: 169
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: a7fa16ad60775f546a770c46f556885a
-      internalID: 347663903
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: UI board Medium Set_5
-      rect:
-        serializedVersion: 2
-        x: 480
-        y: 171
-        width: 240
-        height: 169
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: a3a0c0967b4feaf46bcc7cb37ab9c694
-      internalID: -1323695819
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: UI board Medium Set_6
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 2
-        width: 240
-        height: 169
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 06a5776fe6f9f4640bcc253eab28346c
-      internalID: 2119603658
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: UI board Medium Set_7
-      rect:
-        serializedVersion: 2
-        x: 240
-        y: 2
-        width: 240
-        height: 169
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 1e697cb19aa39cd4eaf72a25e83ce267
-      internalID: -1995201949
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: UI board Medium Set_8
-      rect:
-        serializedVersion: 2
-        x: 480
-        y: 2
-        width: 240
-        height: 169
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 3856792b37ed222458b2b8cd32312fc5
-      internalID: 969711661
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: UI board Medium Set_9
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 0
-        width: 721
-        height: 509
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 092f754e59084334298b408719106db2
-      internalID: -1830944026
       vertices: []
       indices: 
       edges: []
@@ -376,20 +178,11 @@ TextureImporter:
     spriteCustomMetadata:
       entries:
       - key: SpriteEditor.SliceSettings
-        value: '{"sliceOnImport":false,"gridCellCount":{"x":3.0,"y":3.0},"gridSpriteSize":{"x":240.0,"y":169.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":2,"keepEmptyRects":false,"isAlternate":false}'
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":721.0,"y":509.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":2,"keepEmptyRects":false,"isAlternate":false}'
       - key: SpriteEditor.SliceOnImport
         value: False
     nameFileIdTable:
       UI board Medium Set_0: 1620132717
-      UI board Medium Set_1: -2087732113
-      UI board Medium Set_2: 706237613
-      UI board Medium Set_3: -1845442055
-      UI board Medium Set_4: 347663903
-      UI board Medium Set_5: -1323695819
-      UI board Medium Set_6: 2119603658
-      UI board Medium Set_7: -1995201949
-      UI board Medium Set_8: 969711661
-      UI board Medium Set_9: -1830944026
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

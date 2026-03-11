@@ -14,6 +14,8 @@ public class PlayerAnimationManager : MonoBehaviour
     bool isWalkingBackwards;
     bool isDashing;
 
+
+
     
 
 
@@ -33,9 +35,8 @@ public class PlayerAnimationManager : MonoBehaviour
         playerMovement.inputActionsForAnimator.Player.Move.performed += ctx =>  isWalkingBackwards = (ctx.ReadValue<Vector2>().y < 0) ? true : false;
         playerMovement.inputActionsForAnimator.Player.Move.canceled += ctx =>  isWalkingBackwards = (ctx.ReadValue<Vector2>().y < 0) ? true : false;
 
-        //playerMovement.inputActionsForAnimator.Player.Dash.started += ctx => isDashing = animator.SetTrigger("_Dash");
-
         playerMovement.inputActionsForAnimator.Player.Dash.performed += ctx => TryDash();
+        //playerHealth.nombreevento += 
    
        
     }

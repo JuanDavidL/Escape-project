@@ -360,7 +360,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Dodge_Forward
-  m_Speed: 1
+  m_Speed: 2
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 8191853493166278305}
@@ -503,7 +503,7 @@ AnimatorStateMachine:
     m_Position: {x: 40, y: -170, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -573111530189432547}
-    m_Position: {x: 210, y: -230, z: 0}
+    m_Position: {x: 220, y: -260, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions:
   - {fileID: -188372139344528468}

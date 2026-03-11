@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: PowerUp_Speed
   m_EditorClassIdentifier: Assembly-CSharp::PowerUpData
   targetStat: 0
-  amout: 20
+  amout: 5

@@ -3,8 +3,8 @@ using UnityEngine;
 
 public class PlayerStats : MonoBehaviour
 {
-    [Header("Estadisticas Base")]
-    [SerializeField] private float baseMoveSpeed = 5f;
+    // [Header("Estadisticas Base")]
+    private float baseMoveSpeed = 5f;
 
     private Dictionary<StatType, float> statModifiers = new Dictionary<StatType, float>();
 

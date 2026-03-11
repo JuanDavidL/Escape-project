@@ -3,8 +3,11 @@ using UnityEngine;
 
 public class PlayerStats : MonoBehaviour
 {
+    public bool hasDoneIncrement = false;
+    public float TEMPORALFORTESTINGREMOVELATERPLOX = 0f;
     [Header("Estadisticas Base")]
     [SerializeField] private float baseMoveSpeed = 5f;
+    public float currentBaseMove { get; private set; }
 
     private Dictionary<StatType, float> statModifiers = new Dictionary<StatType, float>();
 
@@ -14,6 +17,7 @@ public class PlayerStats : MonoBehaviour
     private void Awake()
     {
         CurrentMoveSpeed = baseMoveSpeed;
+        currentBaseMove = baseMoveSpeed;
     }
 
     public void ApplyPowerUp(PowerUpData powerUp)
@@ -46,7 +50,14 @@ public class PlayerStats : MonoBehaviour
         }
     }
 
-
+    private void Update() {
+        if (!hasDoneIncrement)
+        {
+            CurrentMoveSpeed += TEMPORALFORTESTINGREMOVELATERPLOX;
+            hasDoneIncrement = true;
+        }
+        
+    }
 
 
 }

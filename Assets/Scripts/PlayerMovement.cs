@@ -22,10 +22,17 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float dashDuration = 0.2f;
     [SerializeField] private float dashCooldown = 1f;
     private float lastDashTime;
+    
+
+    // Variables para PlayerAnimationManager
+
+    public PlayerInputActions inputActionsForAnimator { get; private set; }
+
     //En el método Awake, se inicializan las acciones de entrada y se obtiene el componente CharacterController.
     void Awake()
     {
         inputActions = new PlayerInputActions();
+        inputActionsForAnimator = inputActions;
         controller = GetComponent<CharacterController>();
         // llamada para el script de estadisticas
         stats = GetComponent<PlayerStats>();

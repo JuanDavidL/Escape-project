@@ -13,7 +13,6 @@ MonoBehaviour:
   m_Name: Llave
   m_EditorClassIdentifier: Assembly-CSharp::Item
   _itemName: Llave
-  _icon: {fileID: 10915, guid: 0000000000000000f000000000000000, type: 0}
-  _spaceSlots: 1
+  _icon: {fileID: 0}
   _type: 1
   _prefab: {fileID: 6702088069343992595, guid: 883aaf6bf9ccdbf45b8170e1b5f845db, type: 3}

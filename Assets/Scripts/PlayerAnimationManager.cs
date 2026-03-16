@@ -7,17 +7,9 @@ public class PlayerAnimationManager : MonoBehaviour
     PlayerStats playerStats;
     CharacterController characterController;
     PlayerHealth playerHealth;
-
     Animator animator;
-
-    //float Movement;
     bool isWalkingBackwards;
     bool isDashing;
-
-
-
-    
-
 
     private void Start() {
         playerMovement = GetComponent<PlayerMovement>();
@@ -34,22 +26,17 @@ public class PlayerAnimationManager : MonoBehaviour
         playerMovement.inputActionsForAnimator.Player.Move.canceled += ctx => animator.SetFloat("_movementSpeed", 0f);
         playerMovement.inputActionsForAnimator.Player.Move.performed += ctx =>  isWalkingBackwards = (ctx.ReadValue<Vector2>().y < 0) ? true : false;
         playerMovement.inputActionsForAnimator.Player.Move.canceled += ctx =>  isWalkingBackwards = (ctx.ReadValue<Vector2>().y < 0) ? true : false;
-
         playerMovement.inputActionsForAnimator.Player.Dash.performed += ctx => TryDash();
-        //playerHealth.nombreevento += 
-   
-       
     }
 
     private void Update() {
         UpdateOnGround();
         CheckIfBackwards();
         UpdateSpeedValue();
-      
     }
 
     void CheckIfBackwards()
-    {        
+    {
         animator.SetBool("_IsWalkingBack", isWalkingBackwards);
     }
 
@@ -66,9 +53,6 @@ public class PlayerAnimationManager : MonoBehaviour
 
     void UpdateSpeedValue()
     {
-        // Debug.Log("CurrentMoveSpeed is " + playerStats.CurrentMoveSpeed);
-        // Debug.Log("currentBaseMove is " + playerStats.currentBaseMove);
-
         if (playerStats.CurrentMoveSpeed == playerStats.currentBaseMove)
         {
             animator.SetFloat("_movementSpeed", 1);
@@ -79,7 +63,7 @@ public class PlayerAnimationManager : MonoBehaviour
         }
     }
 
-    private void OnEnable() {
+    private void OnEnable(){
         playerHealth = GetComponent<PlayerHealth>();
 
         if (playerHealth != null) {
@@ -101,10 +85,8 @@ public class PlayerAnimationManager : MonoBehaviour
         // Solo activamos daño si no ha muerto
         animator.SetTrigger("_Damaged");
     }
-
+    
     private void HandleDeathAnimation() {
         animator.SetBool("_IsDead", true);
     }
-
-
 }

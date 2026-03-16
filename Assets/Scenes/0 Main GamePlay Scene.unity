@@ -153529,7 +153529,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CameraFollow
   player: {fileID: 533460206}
   offset: {x: 0, y: 3, z: -6}
-  smoothSpeed: 5
+  smoothSpeed: 3.5
 --- !u!114 &1837607112
 MonoBehaviour:
   m_ObjectHideFlags: 0

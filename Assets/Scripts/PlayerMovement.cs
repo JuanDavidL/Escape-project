@@ -63,29 +63,19 @@ public class PlayerMovement : MonoBehaviour
     //Permite que se mueva sin parecer una papa tiesa, haciendo que el personaje gire suavemente hacia la dirección del movimiento.
     void Move()
     {
-        Vector3 move = new Vector3(moveInput.x, 0f, moveInput.y);
-
-        Vector3 camForward = Camera.main.transform.forward;
-        camForward.y = 0f;
-        camForward.Normalize();
-
-        Vector3 camRight = Camera.main.transform.right;
-        camRight.y = 0f;
-        camRight.Normalize();
-
-        Vector3 moveDirection = camForward * move.z + camRight * move.x;
+        Vector3 moveDirection = GetCameraRelativeDirection();
 
         if (moveDirection != Vector3.zero)
         {
-            //Se mueve hacia la dirección del movimiento solo si el jugador está moviéndose hacia adelante o hacia los lados, 
-            //evitando que gire al retroceder y cause interacciones raras con la cámara.
             if (moveInput.y >= 0)
             {
                 Quaternion targetRotation = Quaternion.LookRotation(moveDirection);
                 transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, 10f * Time.deltaTime);
             }
         }
+
         speed = stats.CurrentMoveSpeed;
+
         controller.Move(moveDirection * speed * Time.deltaTime);
     }
     //Aplica la gravedad al jugador, asegurándose de que el jugador se mantenga en el suelo y pueda saltar correctamente.
@@ -129,20 +119,40 @@ public class PlayerMovement : MonoBehaviour
 
         float dashForce = stats != null ? stats.CurrentDashForce : 15f;
 
-        Vector3 inputDir = new Vector3(moveInput.x, 0f, moveInput.y).normalized;
-        Vector3 dashDirection = inputDir != Vector3.zero ? inputDir : transform.forward;
+        Vector3 dashDirection = GetCameraRelativeDirection();
+
+        if (dashDirection == Vector3.zero)
+        {
+            dashDirection = transform.forward;
+        }
 
         float timer = 0f;
+
         while (timer < dashDuration)
         {
-            // Movimiento constante ignorando la velocidad normal y la gravedad
             controller.Move(dashDirection * dashForce * Time.deltaTime);
 
             timer += Time.deltaTime;
-            yield return null; // Hacemos una espera al siguiente frame
+            yield return null;
         }
 
         isDashing = false;
         isDashingForAnimator = isDashing;
+    }
+    Vector3 GetCameraRelativeDirection()
+    {
+        Vector3 camForward = Camera.main.transform.forward;
+        camForward.y = 0f;
+        camForward.Normalize();
+
+        Vector3 camRight = Camera.main.transform.right;
+        camRight.y = 0f;
+        camRight.Normalize();
+
+        Vector3 inputDir = new Vector3(moveInput.x, 0f, moveInput.y);
+
+        Vector3 moveDirection = camForward * inputDir.z + camRight * inputDir.x;
+
+        return moveDirection.normalized;
     }
 }

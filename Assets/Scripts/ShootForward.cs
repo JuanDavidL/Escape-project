@@ -4,6 +4,7 @@ using UnityEngine;
 public class ShootForward : MonoBehaviour
 {
     [SerializeField] float speedProjectile = 50f;
+    [SerializeField] private float damage = 10f;
 
     Rigidbody _rb;
 
@@ -27,14 +28,23 @@ public class ShootForward : MonoBehaviour
 
     void OnCollisionEnter(Collision other)
     {
-        TryDestroyOnImpact(this.gameObject);
+        TryDestroyOnImpact(gameObject);
     }
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Ground") && gameObject.CompareTag("Arrow") || other.CompareTag("Buildings") && gameObject.CompareTag("Arrow") || other.CompareTag("Player") && gameObject.CompareTag("Arrow"))
+        if (other.CompareTag("Ground") && gameObject.CompareTag("Arrow") || other.CompareTag("Buildings") && gameObject.CompareTag("Arrow"))
         {
-            TryDestroyOnImpact(this.gameObject);
+            //TryDestroyOnImpact(gameObject);
+            Destroy(gameObject);
+        }
+        else if (other.CompareTag("Player") && gameObject.CompareTag("Arrow"))
+        {
+            PlayerHealth health = other.GetComponent<PlayerHealth>();
+            if (health != null)
+            {
+                health.TakeDamage(damage);
+            }
             Destroy(gameObject);
         }
     }
@@ -44,6 +54,10 @@ public class ShootForward : MonoBehaviour
         // Se permiten etiquetas comunes en mayúsculas/minúsculas.
         string tag = other.tag;
         if (tag == "Ground" || tag == "ground" || tag == "Buildings" || tag == "buildings" || tag == "Player" || tag == "player")
+        {
+            Destroy(gameObject);
+        }
+        else if (transform.position.y < -10)
         {
             Destroy(gameObject);
         }

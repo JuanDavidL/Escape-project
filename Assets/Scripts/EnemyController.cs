@@ -9,7 +9,7 @@ public class EnemyController : MonoBehaviour
 
     [Header("Aim")]
     [SerializeField] float velocityRotateToObjective = 3f;
-    [SerializeField] float maxAimAngle = 20f;
+    [SerializeField] float maxAimAngle = 40f;
 
     [Header("Line of Sight")]
     [SerializeField] LayerMask lineOfSightMask = ~0;
